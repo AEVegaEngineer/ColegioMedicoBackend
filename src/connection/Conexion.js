@@ -5,14 +5,10 @@ module.exports = {consultar}
       host     : 'localhost',
       user     : 'root',
       password : '',
-      database: 'cimac'
+      database: 'intranet'
     });
 
   function consultar (campos,tabla,where,callback){
-    // console.log(campos)
-    // console.log(where)
-      // console.log(where)
-      // connection.connect();
       connection.query('SELECT '+campos+' from '+tabla+' WHERE '+where, function(err, rows, fields) {
 
         if(err){
@@ -22,12 +18,6 @@ module.exports = {consultar}
           return callback(JSON.stringify(rows))
         }
     });
-  
-      // return JSON.stringify(error)
-    
-     
-  // connection.end();
-    //  return  rows.solution.json()
 }
 function Update (){
   connection.connect();

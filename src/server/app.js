@@ -6,7 +6,8 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       jwt = require('jsonwebtoken'),
       config = require('../configs/config'),
-      app = express();
+      app = express(),
+      md5 = require('md5');
       // async = require('async');
 // 1
 
@@ -72,12 +73,10 @@ rutasProtegidas.use((req, res, next) => {
   });
   }
  });
- 
+
 
 app.post('/autenticar', (req, res) => {
-  console.log(req.body.user)
-  console.log(req.body.pass)
-  conn.consultar('user,pass','login_users','user = "'+req.body.user+'" AND pass = "'+req.body.pass+'"',function(rows,err){
+  conn.consultar('login,pass','usuario_','login = "'+req.body.user+'" AND pass = "'+md5(req.body.pass)+'"',function(rows,err){
     if(err)
     {
       console.log(err)
