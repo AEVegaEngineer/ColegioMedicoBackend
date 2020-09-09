@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server/app.js",
-    "dev": "nodemon --watch src src/server/app.js"
+    "dev": "nodemon --watch src src/server/app.js",
+    "format": "prettier --write \"**/*.js\""
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,23 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "husky": "^4.3.0",
+    "lint-staged": "^10.3.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.1"
+  },
+  "husky": {
+    "hooks": {
+    "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+  "linters": {
+    "*.{js,md,css,json}": [
+      "prettier --write",
+      "git add"
+      ]
+    }
   }
+
 }
