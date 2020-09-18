@@ -13,7 +13,13 @@ function consultarWhereClause(campos, tabla, where, callback) {
         "SELECT " + campos + " from " + tabla + " WHERE " + where,
         function (err, rows, fields) {
             if (err) {
-                return callback(JSON.stringify(err));
+                console.log(err);
+                return callback(
+                    JSON.stringify({
+                        mensaje:
+                            "Ocurrio un error al comunicarnos con la base de datos.",
+                    })
+                );
             }
             if (rows) {
                 return callback(JSON.stringify(rows));

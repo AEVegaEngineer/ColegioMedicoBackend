@@ -2,6 +2,7 @@ const express = require("express");
 var router = express.Router();
 const app = express();
 const autenticar = require("../routes/autenticar/autenticar");
+const notificaciones = require("../routes/notificaciones/notificaciones");
 
 //le asignamos la seguridad a las rutas
 const security = require("../configs/security");
@@ -42,5 +43,7 @@ router.get("/datos", security, (req, res) => {
     ];
     res.json(datos);
 });
+
+router.get("/getNotificaciones", security, notificaciones);
 
 module.exports = router;

@@ -5,12 +5,13 @@ var app = express();
 var conn = require("../../configs/db");
 const md5 = require("md5");
 const config = require("../../configs/config");
+const { json } = require("body-parser");
 
 app.set("llave", config.llave);
 
 module.exports = (req, res) => {
     conn.consultarWhereClause(
-        "login,pass",
+        "id,login,pass",
         "usuario_",
         'login = "' +
             req.body.user +
@@ -26,8 +27,9 @@ module.exports = (req, res) => {
                 //error al validar usuario y contraseña
                 res.json({ mensaje: "Usuario o contraseña incorrectos" });
             } else {
-                console.log(rows);
+                const rowsParsed = JSON.parse(rows);
                 const payload = {
+                    user_id: rowsParsed[0].id,
                     check: true,
                 };
                 const token = jwt.sign(payload, app.get("llave"));
