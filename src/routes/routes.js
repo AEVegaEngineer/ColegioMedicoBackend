@@ -3,6 +3,8 @@ var router = express.Router();
 const app = express();
 const autenticar = require("../routes/autenticar/autenticar");
 const notificaciones = require("../routes/notificaciones/notificaciones");
+const validaciones_sancor = require("../routes/validaciones/sancor");
+const getUserInfo = require("../routes/usuarios/getUserInfo");
 
 //le asignamos la seguridad a las rutas
 const security = require("../configs/security");
@@ -46,4 +48,7 @@ router.get("/datos", security, (req, res) => {
 
 router.get("/getNotificaciones", security, notificaciones);
 
+router.get("/validateSanCor", security, validaciones_sancor);
+
+router.get("/getUserInfo", security, getUserInfo);
 module.exports = router;

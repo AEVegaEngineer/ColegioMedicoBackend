@@ -1,4 +1,8 @@
-module.exports = { consultar, consultarWhereClause };
+module.exports = {
+    consultar,
+    consultarWhereClause,
+    consultarWhereClauseNoJSON,
+};
 //DATOS DE CONEXION
 let mysql = require("mysql");
 let connection = mysql.createConnection({
@@ -23,6 +27,25 @@ function consultarWhereClause(campos, tabla, where, callback) {
             }
             if (rows) {
                 return callback(JSON.stringify(rows));
+            }
+        }
+    );
+}
+function consultarWhereClauseNoJSON(campos, tabla, where, callback) {
+    connection.query(
+        "SELECT " + campos + " from " + tabla + " WHERE " + where,
+        function (err, rows, fields) {
+            if (err) {
+                console.log(err);
+                return callback(
+                    JSON.stringify({
+                        mensaje:
+                            "Ocurrio un error al comunicarnos con la base de datos.",
+                    })
+                );
+            }
+            if (rows) {
+                return callback(rows);
             }
         }
     );

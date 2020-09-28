@@ -10,6 +10,8 @@ const { json } = require("body-parser");
 app.set("llave", config.llave);
 
 module.exports = (req, res) => {
+    console.log(req.param.user);
+    console.log(req.body.pass);
     conn.consultarWhereClause(
         "id,login,pass",
         "usuario_",
